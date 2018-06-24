@@ -1,14 +1,71 @@
 (require 'package)
-(let* ((no-ssl (and (memq system-type '(windows-nt ms-dos))
-                   (not (gnutls-available-p))))
-      (proto (if no-ssl "http" "https")))
- ;; Comment/uncomment these two lines to enable/disable MELPA and MELPA Stable as desired
- ;;(add-to-list 'package-archives (cons "melpa" (concat proto "://melpa.org/packages/")) t)
- (add-to-list 'package-archives (cons "melpa-stable" (concat proto "://stable.melpa.org/packages/")) t)
- (when (< emacs-major-version 24)
-   ;; For important compatibility libraries like cl-lib
-   (add-to-list 'package-archives '("gnu" . (concat proto "://elpa.gnu.org/packages/")))))
+
+(add-to-list 'package-archives
+             '("melpa" . "https://melpa.org/packages/") t)
+;; keep the installed packages in .emacs.d
+(setq package-user-dir (expand-file-name "elpa" user-emacs-directory))
 (package-initialize)
+;; update the package metadata is the local cache is missing
+(unless package-archive-contents
+  (package-refresh-contents))
+
+(setq user-full-name "Coppis Javier"
+      user-mail-address "javier.coppis@gmail.com")
+
+;; Always load newest byte code
+(setq load-prefer-newer t)
+
+;; warn when opening files bigger than 100MB
+(setq large-file-warning-threshold 100000000)
+
+;; Turn off mouse interface early in startup to avoid momentary display
+(if (fboundp 'menu-bar-mode) (menu-bar-mode -1))
+(if (fboundp 'tool-bar-mode) (tool-bar-mode -1))
+(if (fboundp 'scroll-bar-mode) (scroll-bar-mode -1))
+(blink-cursor-mode -1)
+(setq ring-bell-function 'ignore)
+
+;; nice scrolling
+(setq scroll-margin 0
+      scroll-conservatively 100000
+      scroll-preserve-screen-position 1)
+
+;; mode line settings
+(line-number-mode t)
+(column-number-mode t)
+(size-indication-mode t)
+
+;; enable y/n answers
+(fset 'yes-or-no-p 'y-or-n-p)
+
+;; more useful frame title, that show either a file or a
+;; buffer name (if the buffer isn't visiting a file)
+(setq frame-title-format
+      '((:eval (if (buffer-file-name)
+                   (abbreviate-file-name (buffer-file-name))
+		 "%b"))))
+
+;; Emacs modes typically provide a standard means to change the
+;; indentation width -- eg. c-basic-offset: use that to adjust your
+;; personal indentation width, while maintaining the style (and
+;; meaning) of any files you load.
+(setq-default indent-tabs-mode nil)   ;; don't use tabs to indent
+(setq-default tab-width 2) ;; but maintain correct appearance
+
+;; Newline at end of file
+(setq require-final-newline t)
+
+;; highlight the current line
+(global-hl-line-mode +1)
+
+;; revert buffers automatically when underlying files are changed externally
+(global-auto-revert-mode t)
+
+(prefer-coding-system 'utf-8)
+(set-default-coding-systems 'utf-8)
+(set-terminal-coding-system 'utf-8)
+(set-keyboard-coding-system 'utf-8)
+
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
