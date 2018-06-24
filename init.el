@@ -25,6 +25,9 @@
 (blink-cursor-mode -1)
 (setq ring-bell-function 'ignore)
 
+;; No splash screen please ... jeez
+(setq inhibit-startup-message t)
+
 ;; nice scrolling
 (setq scroll-margin 0
       scroll-conservatively 100000
