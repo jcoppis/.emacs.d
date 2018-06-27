@@ -39,7 +39,7 @@
 (size-indication-mode t)
 
 ;; enable y/n answers
-(fset 'yes-or-no-p 'y-or-n-p)
+;; (defalias 'yes-or-no-p 'y-or-n-p)
 
 ;; more useful frame title, that show either a file or a
 ;; buffer name (if the buffer isn't visiting a file)
@@ -75,7 +75,7 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(js-indent-level 2)
- '(package-selected-packages (quote (js2-mode magit alchemist counsel))))
+ '(package-selected-packages (quote (zenburn-theme js2-mode magit alchemist counsel))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -112,7 +112,8 @@
 (global-set-key (kbd "C-c C-r") 'ivy-resume)
 
 ;; theme
-(add-to-list 'custom-theme-load-path "~/.emacs.d/themes/")
+;; comentada la linea de abajo porque trato de cargar el zenburn desde packete
+;; (add-to-list 'custom-theme-load-path "~/.emacs.d/themes/")
 (load-theme 'zenburn t)
 
 ;; magit
