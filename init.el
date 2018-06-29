@@ -57,7 +57,7 @@
 
 ;; Settings for currently logged in user
 (setq user-settings-dir
-      (concat user-emacs-directory "users/" "jcoppis")) ;; VER user-login-name en lugar de jcoppis
+      (concat user-emacs-directory "users/" (or user-login-name "jcoppis")))
 (add-to-list 'load-path user-settings-dir)
 
 ;; Conclude init by setting up specifics for the current user
