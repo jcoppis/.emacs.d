@@ -9,84 +9,23 @@
 (unless package-archive-contents
   (package-refresh-contents))
 
-(setq user-full-name "Coppis Javier"
-      user-mail-address "javier.coppis@gmail.com")
-
 ;; Always load newest byte code
 (setq load-prefer-newer t)
 
 ;; warn when opening files bigger than 100MB
 (setq large-file-warning-threshold 100000000)
 
-;; Turn off mouse interface early in startup to avoid momentary display
-(if (fboundp 'menu-bar-mode) (menu-bar-mode -1))
-(if (fboundp 'tool-bar-mode) (tool-bar-mode -1))
-(if (fboundp 'scroll-bar-mode) (scroll-bar-mode -1))
-(blink-cursor-mode -1)
-(setq ring-bell-function 'ignore)
+(setq settings-dir
+      (expand-file-name "settings" user-emacs-directory))
 
-;; No splash screen please ... jeez
-(setq inhibit-startup-message t)
+;; Set up load path
+(add-to-list 'load-path settings-dir)
 
-;; nice scrolling
-(setq scroll-margin 0
-      scroll-conservatively 100000
-      scroll-preserve-screen-position 1)
-
-;; mode line settings
-(line-number-mode t)
-(column-number-mode t)
-(size-indication-mode t)
-
-;; enable y/n answers
-;; (defalias 'yes-or-no-p 'y-or-n-p)
-
-;; more useful frame title, that show either a file or a
-;; buffer name (if the buffer isn't visiting a file)
-(setq frame-title-format
-      '((:eval (if (buffer-file-name)
-                   (abbreviate-file-name (buffer-file-name))
-		 "%b"))))
-
-;; Emacs modes typically provide a standard means to change the
-;; indentation width -- eg. c-basic-offset: use that to adjust your
-;; personal indentation width, while maintaining the style (and
-;; meaning) of any files you load.
-(setq-default indent-tabs-mode nil)   ;; don't use tabs to indent
-(setq-default tab-width 2) ;; but maintain correct appearance
-
-;; Newline at end of file
-(setq require-final-newline t)
-
-;; highlight the current line
-(global-hl-line-mode +1)
-
-;; revert buffers automatically when underlying files are changed externally
-(global-auto-revert-mode t)
-
-(prefer-coding-system 'utf-8)
-(set-default-coding-systems 'utf-8)
-(set-terminal-coding-system 'utf-8)
-(set-keyboard-coding-system 'utf-8)
-
-(custom-set-variables
- ;; custom-set-variables was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(js-indent-level 2)
- '(package-selected-packages
-   (quote
-    (flycheck zenburn-theme js2-mode magit alchemist counsel))))
-(custom-set-faces
- ;; custom-set-faces was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- )
+;; Keep emacs Custom-settings in separate file
+(setq custom-file (expand-file-name "custom.el" user-emacs-directory))
+(load custom-file)
 
 (ivy-mode 1)
-(add-hook 'prog-mode-hook 'global-display-line-numbers-mode)
 (global-company-mode 1)
 
 (setq ivy-use-virtual-buffers t)
@@ -113,12 +52,14 @@
 ;; Ivy-resume and other commands
 (global-set-key (kbd "C-c C-r") 'ivy-resume)
 
-;; theme
-;; comentada la linea de abajo porque trato de cargar el zenburn desde packete
-;; (add-to-list 'custom-theme-load-path "~/.emacs.d/themes/")
-(load-theme 'zenburn t)
-
 ;; magit
 (global-set-key (kbd "C-x g") 'magit-status)
 
-(put 'narrow-to-region 'disabled nil)
+;; Settings for currently logged in user
+(setq user-settings-dir
+      (concat user-emacs-directory "users/" "jcoppis")) ;; VER user-login-name en lugar de jcoppis
+(add-to-list 'load-path user-settings-dir)
+
+;; Conclude init by setting up specifics for the current user
+(when (file-exists-p user-settings-dir)
+(mapc 'load (directory-files user-settings-dir nil "^[^#].*el$")))
