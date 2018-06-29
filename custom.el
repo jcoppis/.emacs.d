@@ -4,9 +4,7 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(js-indent-level 2)
- '(package-selected-packages
-   (quote
-    (flycheck zenburn-theme js2-mode magit alchemist counsel))))
+ '(package-selected-packages (quote (flycheck js2-mode magit alchemist counsel))))
 
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
