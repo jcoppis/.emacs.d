@@ -43,7 +43,6 @@
 		 "%b"))))
 
 ;; theme
-(add-to-list 'custom-theme-load-path "~/.emacs.d/themes/")
 (load-theme 'zenburn t)
 
 ;; Emacs modes typically provide a standard means to change the

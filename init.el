@@ -25,6 +25,9 @@
 (setq custom-file (expand-file-name "custom.el" user-emacs-directory))
 (load custom-file)
 
+;; Keep themes in separate directory
+(add-to-list 'custom-theme-load-path "~/.emacs.d/themes/")
+
 (ivy-mode 1)
 (global-company-mode 1)
 
