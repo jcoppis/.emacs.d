@@ -29,6 +29,9 @@
 (add-to-list 'custom-theme-load-path "~/.emacs.d/themes/")
 
 (ivy-mode 1)
+
+(setq company-idle-delay 0)
+(setq company-dabbrev-downcase nil)
 (global-company-mode 1)
 
 (setq ivy-use-virtual-buffers t)
