@@ -6,6 +6,8 @@
 (setq package-user-dir (expand-file-name "elpa" user-emacs-directory))
 (package-initialize)
 
+(package-refresh-contents)
+
 (defvar my-packages '(auto-yasnippet
                       emmet-mode
                       magit
