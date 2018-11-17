@@ -5,6 +5,22 @@
 ;; keep the installed packages in .emacs.d
 (setq package-user-dir (expand-file-name "elpa" user-emacs-directory))
 (package-initialize)
+
+(defvar my-packages '(auto-yasnippet
+                      emmet-mode
+                      magit
+                      counsel
+                      ag
+                      elixir-mode
+                      js2-mode
+                      flycheck
+                      paredit
+                      clojure-mode
+                      cider))
+(dolist (p my-packages)
+  (unless (package-installed-p p)
+    (package-install p)))
+
 ;; update the package metadata is the local cache is missing
 (unless package-archive-contents
   (package-refresh-contents))
