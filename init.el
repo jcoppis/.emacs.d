@@ -17,8 +17,10 @@
                       js2-mode
                       flycheck
                       paredit
+                      rainbow-delimiters
                       clojure-mode
-                      cider))
+                      cider
+                      slime))
 (dolist (p my-packages)
   (unless (package-installed-p p)
     (package-install p)))
@@ -26,6 +28,9 @@
 ;; update the package metadata is the local cache is missing
 (unless package-archive-contents
   (package-refresh-contents))
+
+;; Set default lisp
+(setq inferior-lisp-program "/bin/sbcl")
 
 ;; Always load newest byte code
 (setq load-prefer-newer t)
@@ -48,7 +53,7 @@
 
 (ivy-mode 1)
 
-(setq company-idle-delay 0)
+(setq company-idle-delay .2)
 (setq company-dabbrev-downcase nil)
 (global-company-mode 1)
 
