@@ -71,7 +71,6 @@
 
 (add-hook 'prog-mode-hook 'global-display-line-numbers-mode)
 (add-hook 'prog-mode-hook 'rainbow-delimiters-mode)
-(add-hook 'prog-mode-hook 'paredit-mode)
 
 ;; Run at full power please
 (put 'downcase-region 'disabled nil)
