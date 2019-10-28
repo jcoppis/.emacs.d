@@ -6,7 +6,7 @@
  '(js-indent-level 2)
  '(package-selected-packages
    (quote
-    (slime rainbow-delimiters flycheck js2-mode magit alchemist counsel))))
+    (restclient rg sql-indent slime rainbow-delimiters flycheck js2-mode magit counsel))))
 
 (custom-set-faces
  ;; custom-set-faces was added by Custom.

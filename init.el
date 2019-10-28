@@ -13,7 +13,6 @@ There are two things you can do about this warning:
 
 
   (add-to-list 'package-archives (cons "melpa" (concat proto "://melpa.org/packages/")) t)
-  ;;(add-to-list 'package-archives (cons "melpa-stable" (concat proto "://stable.melpa.org/packages/")) t)
 
   (when (< emacs-major-version 24)
     ;; For important compatibility libraries like cl-lib
@@ -26,6 +25,7 @@ There are two things you can do about this warning:
 (package-refresh-contents)
 
 (defvar my-packages '(use-package
+                      restclient
                       auto-yasnippet
                       emmet-mode
                       magit
@@ -33,14 +33,14 @@ There are two things you can do about this warning:
 		                  hydra
 		                  lispy
 		                  company
-                      ag
+                      rg
                       flycheck
-                      elixir-mode
                       js2-mode
                       rainbow-delimiters
                       clojure-mode
                       cider
-                      slime))
+                      slime
+                      sql-indent))
 (dolist (p my-packages)
   (unless (package-installed-p p)
     (package-install p)))

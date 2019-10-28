@@ -33,7 +33,7 @@
 (size-indication-mode t)
 
 ;; enable y/n answers
-;; (defalias 'yes-or-no-p 'y-or-n-p)
+(defalias 'yes-or-no-p 'y-or-n-p)
 
 ;; more useful frame title, that show either a file or a
 ;; buffer name (if the buffer isn't visiting a file)
